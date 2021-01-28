@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { IfStmt } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -25,6 +26,14 @@ export class AuthService {
   getUserDetails(){
     return JSON.parse(localStorage.getItem('userDetails'));
   }
+  getToken(){
+    const userDetails = this.getUserDetails();
+    if(userDetails && userDetails.Token){
+      return userDetails.token;
+    }else{
+      return '';
+    }
+  }
 
   isLoggedIn(){
     const userDetails = this.getUserDetails();
@@ -32,6 +41,12 @@ export class AuthService {
       return true;
     } else {
       return false;
+    }
+  }
+  getRole(){
+    const userDetails = this.getUserDetails();
+    if(userDetails && userDetails.role) {
+      return userDetails.role;
     }
   }
 

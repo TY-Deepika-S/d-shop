@@ -7,7 +7,7 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
 
-  baseUrl = 'http://ty-shop.herokuapp.com/api/products/';
+  baseUrl = 'http://ty-shop-token.herokuapp.com/api/products/';
   myToken:string;
 
   constructor(private http: HttpClient) { }
