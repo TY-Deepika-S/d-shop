@@ -6,15 +6,28 @@
       <div class="form-group">
           <label for="email">Email</label>
           <input type="email" name="email" #email="ngModel" ngModel
-           class="form-control">
+           class="form-control" required>
+           <div *ngIf = "email.touched && email.invalid">
+            <div *ngIf = "email.errors.required"
+            class="alert alert-danger">
+            This filed is Mandatory
+            </div>
+
+         </div>
       </div>
       <div class="form-group">
           <label for="password">Password</label>
           <input type="password" name="password"
-          #password="ngModel" ngModel class="form-control">
+          #password="ngModel" ngModel class="form-control" required>
+          <div *ngIf = "email.touched && email.invalid">
+            <div *ngIf = "email.errors.required"
+            class="alert alert-danger">
+            This filed is Mandatory
+            </div>
+         </div>
       </div>
       <button class="btn btn-primary float-right"
-      type="submit">
+      type="submit" [disabled] = "loginForm.invalid">
           Login
       </button>
   </form>

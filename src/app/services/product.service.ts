@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 
@@ -7,7 +7,9 @@ import { Product } from '../models/product.model';
 })
 export class ProductService {
 
-  baseUrl = 'http://ty-shop.herokuapp.com/api/products/'
+  baseUrl = 'http://ty-shop.herokuapp.com/api/products/';
+  myToken:string;
+
   constructor(private http: HttpClient) { }
 
   getProducts() {
@@ -27,26 +29,35 @@ export class ProductService {
   }
 
   addProduct(product) {
+    const myHeader = new HttpHeaders({
+      Authorization:'Bearer ' + this.myToken
+    })
     return this.http.post<{
       error: boolean,
       message: string,
       product: Product
-    }>(this.baseUrl, product);
+    }>(this.baseUrl, product, {headers:myHeader});
   }
 
   updateProduct(product: Product) {
+    const myHeader = new HttpHeaders({
+      Authorization:'Bearer ' + this.myToken
+    })
     return this.http.put<{
       error: boolean,
       message: string,
       product: Product
-    }>(`${this.baseUrl}${product._id}`, product);
+    }>(`${this.baseUrl}${product._id}`, product, {headers:myHeader});
   }
 
   deleteProduct(id){
+    const myHeader = new HttpHeaders({
+      Authorization:'Bearer ' + this.myToken
+    })
     return this.http.delete<{
       error: boolean,
       message: string,
       product: Product
-    }>(`${this.baseUrl}${id}`);
+    }>(`${this.baseUrl}${id}`, {headers:myHeader});
   }
 }

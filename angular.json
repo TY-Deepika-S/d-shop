@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "d-shop"
+    }
+  },
+  "defaultProject": "d-shop",
+  "cli": {
+    "analytics": "815a399d-d010-45f1-ab26-8c6b854fb6c1"
+  }
 }
