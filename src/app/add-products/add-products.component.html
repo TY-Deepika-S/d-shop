@@ -1,0 +1,59 @@
+<div class="alert alert-danger" *ngIf="error">
+  {{ error }}
+</div>
+<div class="alert alert-success" *ngIf="message">
+  {{message}}
+</div>
+<div class="text-center mt-5" *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+<div>
+  <div class="col-md-4 offset-md-4 mt-4 box" *ngIf='!isLoading'>
+    <h4>PRODUCT DETAILS</h4>
+    <form #productForm="ngForm" (ngSubmit)='onSubmit(productForm)'>
+      <div class="form-group">
+        <label for=" prodctName"> productName</label>
+        <input type="text" name="productName" #productName="ngModel" ngModel class="form-control"
+         required>
+         <div *ngIf="productName.touched && productName.invalid">
+          <div *ngIf="productName.errors.required" class="alert alert-danger">
+            this field is mandatory
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for=" productPrice"> productPrice</label>
+        <input type="text" name="productPrice" #productPrice="ngModel" ngModel class="form-control"
+          pattern="^[0-9]*$"  required>
+          <div *ngIf="productPrice.touched && productPrice.invalid">
+            <div *ngIf="productPrice.errors.pattern" class="alert alert-danger">
+              enter number
+            </div >
+          </div>
+
+      </div>
+      <div class="form-group">
+        <label for=" productImageURL"> productImageURL</label>
+        <input type="text" name="productImageURL" #productImageURL="ngModel" ngModel class="form-control"
+            required>
+            <div *ngIf="productImageURL.touched && productImageURL.invalid">
+              <div *ngIf="productImageURL.errors.required" class="alert alert-danger">
+                this field is mandatory
+              </div>
+            </div>
+      </div>
+      <div class="form-group">
+        <label for=" productDescription"> productDescription</label>
+        <input type="text" name="productDescription" #productDescription="ngModel" ngModel class="form-control"
+         required>
+         <div *ngIf="productDescription.touched && productDescription.invalid">
+          <div *ngIf="productDescription.errors.required" class="alert alert-danger">
+            this field is mandatory
+          </div>
+        </div>
+
+      </div>
+      <button class="btn btn-outline-primary float-right" type="submit" [disabled]='productForm.invalid'>Submit</button>
+    </form>
+  </div>
+  </div>

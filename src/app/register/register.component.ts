@@ -10,28 +10,31 @@ import { AuthService } from '../services/auth.service';
 export class RegisterComponent implements OnInit {
 
   message:string;
-  error:string;
-   constructor(private auth:AuthService) { }
+  error: string;
+
+  constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
-  onRegister(form:NgForm){
-    this.auth.register(form.value)
-    .subscribe(res=>{
+  onRegister(form: NgForm){
+    this.auth.register(form.value).subscribe(res => {
       console.log(res);
-      if(res.error) {
+      if(res.error){
         this.error = res.message;
-        setTimeout(()=>{
+        setTimeout(() =>{
           this.error = null;
-        },5000)
-      } else {
+        }, 5000);
+
+      }else {
         this.message = res.message;
-        setTimeout(()=>{
+        setTimeout(() =>{
           this.message = null;
         },5000);
         form.reset();
       }
+
     });
   }
+
 }

@@ -1,16 +1,13 @@
-<!-- <div class="container mb-5">
+<div class="wrapper">
   <div class="row">
-    <div class="card col-md-3 mt-3 shadow " *ngFor='let prd of product; index as i'>
-      <img class="card-img-top" [src]="prd.productImgUrl" alt="......">
-      <div class="card-head h4 text-center">{{prd.productName}}</div>
+    <div class="col-md-3" *ngFor="let product of products; index as i">
+      <div class="card">
+        <img [src]="product.productImageURL" alt="" height="150px" width="100%" class="card-img-top">
         <div class="card-body">
-          <p><b>Price:</b>{{prd.productPrice}}</p>
-          <p><b>Description:</b>{{prd.productDescription}}</p>
+          <div>{{ product.productName }}</div>
+          <div> {{ product.productPrice }}</div>
         </div>
-
+      </div>
     </div>
   </div>
-</div> -->
-
-
-
+</div>

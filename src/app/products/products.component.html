@@ -1,36 +1,24 @@
-<div class="text-center mt-5" *ngIf='isLoading'>
+<div class="text-center mt-4" *ngIf="isLoading">
   <app-spinner></app-spinner>
 </div>
-<div class="wrapper" *ngIf="!isLoading">
+
+<div class="wrapper">
   <div class="row">
     <div class="col-md-3" *ngFor="let product of products; index as i">
-      <div class="card mt-2 shadow">
-        <img
-          [src]="product.productImageURL"
-          alt="product image"
-          height="150px"
-          width=""
-          class="card-img-top"
-          (click)='onSelectingProduct(product)'
-        />
+      <div class="card">
+        <img [src]="product.productImageURL" alt="" height="150px" width="100%"
+        class="card-img-top" (click)="onSelectingProduct(product)">
         <div class="card-body">
           <div>{{ product.productName }}</div>
-          <div>Rs: {{ product.productPrice }}.00</div>
+          <div> {{ product.productPrice }}</div>
         </div>
-        <div class="card-footer" *ngIf='this.auth.isAdmin()'>
-          <button
-            class="btn btn-outline-warning"
-            data-toggle="modal"
-            data-target="#editProductModal"
-            (click)="onEdit(product)"
-          >
-            EDIT
+        <div class="card-footer" *ngIf="this.auth.isAdmin()">
+          <button class="btn btn-secondary" (click)="onEdit(product)"
+           data-toggle="modal" data-target="#editProductModal">
+            Edit
           </button>
-          <button
-            class="btn btn-outline-danger float-right"
-            (click)="deleteProduct(product._id)"
-          >
-            DELETE
+          <button class="btn btn-danger float-right" (click)="deleteProduct(product._id)">
+            Delete
           </button>
         </div>
       </div>
@@ -38,96 +26,56 @@
   </div>
 </div>
 
-<!-- Edit Form Modal -->
-<div
-  class="modal fade"
-  id="editProductModal"
-  tabindex="-1"
-  aria-labelledby="editProductModalLabel"
-  aria-hidden="true"
->
+
+<!-- Modal Form -->
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <div class="text-center mt-5" *ngIf='isEditing'>
-          <app-spinner></app-spinner>
-        </div>
         <form #editProductForm="ngForm" *ngIf="selectedProductToEdit">
-          <input
-            type="hidden"
-            name="_id"
-            #_id="ngModel"
-            [(ngModel)]="selectedProductToEdit._id"
-          />
+          <input type="hidden" name="_id" #_id="ngModel"
+          [(ngModel)]="selectedProductToEdit._id">
           <div class="form-group">
-            <label for="productName">Product Name</label>
-            <input
-              type="text"
-              #productName="ngModel"
-              [(ngModel)]="selectedProductToEdit.productName"
-              name="productName"
-              id="productName"
-              class="form-control"
-            />
+            <label for=" prodctName"> productName</label>
+            <input type="text" name="productName" #productName="ngModel"
+            [(ngModel)]='selectedProductToEdit.productName' class="form-control"
+             required>
           </div>
           <div class="form-group">
-            <label for="productPrice">Product Price</label>
-            <input
-              type="text"
-              #productPrice="ngModel"
-              [(ngModel)]="selectedProductToEdit.productPrice"
-              name="productPrice"
-              id="productPrice"
-              class="form-control"
-            />
+            <label for=" productPrice"> productPrice</label>
+            <input type="text" name="productPrice" #productPrice="ngModel"
+            [(ngModel)]='selectedProductToEdit.productPrice' class="form-control"
+              pattern="^[0-9]*$"  required>
+
           </div>
           <div class="form-group">
-            <label for="productImageURL">Product Image URL</label>
-            <input
-              type="text"
-              name="productImageURL"
-              #productImage="ngModel"
-              [(ngModel)]="selectedProductToEdit.productImageURL"
-              id="productImageURL"
-              class="form-control"
-            />
+            <label for=" productImageURL"> productImageURL</label>
+            <input type="text" name="productImageURL" #productImageURL="ngModel"
+            [(ngModel)]='selectedProductToEdit.productImageURL' class="form-control"
+                required>
           </div>
           <div class="form-group">
-            <label for="productDescription">Production Description</label>
-            <textarea
-              name="productDescription"
-              #productDescription="ngModel"
-              [(ngModel)]="selectedProductToEdit.productDescription"
-              id="productDescription"
-              class="form-control"
-            >
-            </textarea>
+            <label for=" productDescription"> productDescription</label>
+            <input type="text" name="productDescription" #productDescription="ngModel"
+            [(ngModel)]='selectedProductToEdit.productDescription' class="form-control"
+             required>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-dismiss="modal"
-          #closeModal
-        >
-          Close
-        </button>
-        <button type="button" class="btn btn-primary" (click)="editProduct()">
-          Save changes
-        </button>
+        <button type="button" class="btn btn-secondary"
+        #closeModal
+         data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"
+        (click)="editProduct()">
+        Save changes
+      </button>
       </div>
     </div>
   </div>

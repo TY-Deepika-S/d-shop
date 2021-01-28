@@ -9,51 +9,43 @@
       <div class="form-group">
           <label for="fullName">Full Name</label>
           <input type="text" name="fullName"
-          #fullName="ngModel" ngModel class="form-control" required minlength='3' pattern="^[a-zA-z]*$">
-            <div *ngIf = "fullName.touched && fullName.invalid">
-          <div *ngIf = "fullName.errors.required"
+          #fullName="ngModel" ngModel class="form-control" required minlength="3" pattern="^[a-zA-z]*$">
+          <div *ngIf="fullName.touched && fullName.invalid">
+            <div *ngIf="fullName.errors.required"
             class="alert alert-danger">
-            This filed is Mandatory
+              This Field is Mandatory
             </div>
-            <div *ngIf = "fullName.errors.pattern"
+            <div *ngIf= "fullName.errors.pattern"
             class="alert alert-danger">
-            number are not allowed
-            </div>
-            <div *ngIf = "fullName.errors.minlength && !fullName.errors.pattern"
+              numbers are not allowed
+          </div>
+            <div *ngIf="fullName.errors.minlength && !fullName.errors.pattern"
             class="alert alert-danger">
-            minimum 3 character is required
+            minimum 3 charecters required
             </div>
           </div>
-
       </div>
       <div class="form-group">
           <label for="email">Email</label>
           <input type="email" name="email" #email="ngModel" ngModel
-           class="form-control" required  pattern="[^@\s]+@[^@\s]+"  >
-         <div *ngIf = "email.touched && email.invalid">
-           <div *ngIf = "email.errors.required"
-           class="alert alert-danger">
-           This filed is Mandatory
+           class="form-control" required>
+           <div *ngIf="email.touched && email.invalid">
+            <div *ngIf="email.errors.required"
+            class="alert alert-danger">
+              This Field is Mandatory
+            </div>
            </div>
-           <div *ngIf = "email.errors.pattern"
-           class="alert alert-danger">
-           invaild email
-           </div>
-
-        </div>
-
       </div>
       <div class="form-group">
           <label for="password">Password</label>
           <input type="password" name="password"
           #password="ngModel" ngModel class="form-control" required>
-          <div *ngIf = "email.touched && email.invalid">
-            <div *ngIf = "email.errors.required"
+          <div *ngIf="password.touched && password.invalid">
+            <div *ngIf="password.errors.required"
             class="alert alert-danger">
-            This filed is Mandatory
+              This Field is Mandatory
             </div>
-
-         </div>
+           </div>
       </div>
       <div class="form-group">
           <label for="role">Role</label>
@@ -63,7 +55,7 @@
           </select>
       </div>
       <button class="btn btn-primary float-right"
-      type="submit" [disabled] = "registerForm.invalid">
+      type="submit" [disabled]="registerForm.invalid">
           Register
       </button>
   </form>

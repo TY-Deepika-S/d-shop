@@ -1,8 +1,9 @@
-export interface Product {
-  _id: number,
-  productName: string,
-  productPrice: number,
-  productDescription: string,
-  productImageURL: string,
-  __v: number
+import { ProductService } from "../services/product.service";
+
+export interface Products{
+  _id: string;
+  productName: string;
+  productPrice: number;
+  productImageURL: string;
+  productDescription: string;
 }

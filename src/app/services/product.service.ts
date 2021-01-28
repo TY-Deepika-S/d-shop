@@ -1,22 +1,23 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product.model';
+import { Products } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  baseUrl = 'https://ty-shop-token.herokuapp.com/api/products/';
+  myToken: string;
 
-  baseUrl = 'http://ty-shop-token.herokuapp.com/api/products/';
-  myToken:string;
 
-  constructor(private http: HttpClient) { }
+  constructor( private http: HttpClient) { }
 
-  getProducts() {
+  getProducts(){
+
     return this.http.get<{
       error: boolean,
       message: string,
-      products: Product[]
+      products: Products[]
     }>(this.baseUrl);
   }
 
@@ -24,40 +25,48 @@ export class ProductService {
     return this.http.get<{
       error: boolean,
       message: string,
-      products: Product
-    }> (`${this.baseUrl}${productId}`)
+      products: Products
+    }>(`${this.baseUrl}${productId}`);
   }
 
-  addProduct(product) {
-    const myHeader = new HttpHeaders({
-      Authorization:'Bearer ' + this.myToken
-    })
+  addProduct(product){
+    // const myHeader = new HttpHeaders({
+    //   Authorization:'Bearer ' + this.myToken
+    // })
+
     return this.http.post<{
       error: boolean,
       message: string,
-      product: Product
-    }>(this.baseUrl, product, {headers:myHeader});
+      product: Products,
+
+    }>(this.baseUrl, product);
+
   }
 
-  updateProduct(product: Product) {
-    const myHeader = new HttpHeaders({
-      Authorization:'Bearer ' + this.myToken
-    })
+  updateProduct(product: Products) {
+    // const myHeader = new HttpHeaders({
+    //   Authorization:'Bearer ' + this.myToken
+    // })
+
     return this.http.put<{
       error: boolean,
       message: string,
-      product: Product
-    }>(`${this.baseUrl}${product._id}`, product, {headers:myHeader});
-  }
+      product: Products,
 
-  deleteProduct(id){
-    const myHeader = new HttpHeaders({
-      Authorization:'Bearer ' + this.myToken
-    })
-    return this.http.delete<{
-      error: boolean,
+  }> (
+    `${this.baseUrl}${product._id}`,
+    product
+  );
+}
+deleteProduct(id){
+  // const myHeader = new HttpHeaders({
+  //   Authorization:'Bearer ' + this.myToken
+  // })
+
+  return this.http.delete<{
+    error: boolean,
       message: string,
-      product: Product
-    }>(`${this.baseUrl}${id}`, {headers:myHeader});
-  }
+      product: Products
+  }>(`${this.baseUrl}${id}`);
+}
 }
