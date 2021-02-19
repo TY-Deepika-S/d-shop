@@ -20,12 +20,12 @@ export class ProductService {
       products: Products[]
     }>(this.baseUrl);
   }
-
+//to get each product using id
   getProduct(productId){
     return this.http.get<{
       error: boolean,
       message: string,
-      products: Products
+      product: Products
     }>(`${this.baseUrl}${productId}`);
   }
 

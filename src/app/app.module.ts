@@ -13,6 +13,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { FilterPipe } from './pipes/filter.pipe';
+import { TrimStringPipe } from './pipes/trim-string.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     ProductDetailsComponent,
     RegisterComponent,
     LoginComponent,
+    FilterPipe,
+    TrimStringPipe,
   ],
   imports: [
     BrowserModule,

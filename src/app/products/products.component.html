@@ -1,16 +1,25 @@
+<h1 class="text-center">
+  {{todaysDate | async | date : 'medium'}}
+</h1>
+
 <div class="text-center mt-4" *ngIf="isLoading">
   <app-spinner></app-spinner>
 </div>
 
+<div class="col-md-4 offset-md-4 mt5 mb-4" >
+  <input type="search" placeholder="enter product name to search..."
+  [(ngModel)]="searchData" class="form-control">
+</div>
+
 <div class="wrapper">
   <div class="row">
-    <div class="col-md-3" *ngFor="let product of products; index as i">
+    <div class="col-md-3" *ngFor="let product of products | filter: searchData; index as i">
       <div class="card">
         <img [src]="product.productImageURL" alt="" height="150px" width="100%"
         class="card-img-top" (click)="onSelectingProduct(product)">
         <div class="card-body">
-          <div>{{ product.productName }}</div>
-          <div> {{ product.productPrice }}</div>
+          <div>{{ product.productName | uppercase }} </div>
+          <div> {{ product.productPrice | currency:"INR" }} </div>
         </div>
         <div class="card-footer" *ngIf="this.auth.isAdmin()">
           <button class="btn btn-secondary" (click)="onEdit(product)"

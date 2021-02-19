@@ -1,9 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Products } from '../models/product.model';
 import { AuthService } from '../services/auth.service';
 import { ProductService } from '../services/product.service';
+import {FilterPipe} from '../pipes/filter.pipe';
 
 @Component({
   selector: 'app-products',
@@ -17,15 +19,22 @@ export class ProductsComponent implements OnInit {
   constructor(private productservice: ProductService,
     public auth: AuthService,
     private router: Router ) { }
+    searchData: string;
+    todaysDate;
  products: Products[];
  isLoading = false;
  selectedProductToEdit: Products;
- @ViewChild('editProductForm')
+ @ViewChild('editProductForm')//to edit if not it work in normal case
  editForm: NgForm;
- @ViewChild('closeModal')
+ @ViewChild('closeModal')//to close if not work in normal case
  closeButton: ElementRef;
   ngOnInit(): void {
     this.getProducts();
+    this.todaysDate = new Observable(observer => {
+      setInterval(() => {
+        observer.next(new Date());
+      },1000);
+    });
   }
 
 
